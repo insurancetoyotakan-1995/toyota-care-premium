@@ -1,0 +1,753 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#880E4F">
+<title>เช็กเบี้ยประกัน TOYOTA CARE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* pink palette: 50 #fce4ec · 100 #f8bbd0 · 200 #f48fb1 · 300 #f06292 · 400 #ec407a · 500 #e91e63 · 600 #d81b60 · 700 #c2185b · 800 #ad1457 · 900 #880e4f */
+  --bg:#FFF6F9; --card:#FFFFFF; --fg:#2B0A1A; --muted:#6D4458; --border:#F8BBD0; --soft:#FCE4EC;
+  --primary:#880E4F; --on-primary:#FFFFFF; --accent:#D81B60; --on-accent:#FFFFFF; --accent-strong:#AD1457; --accent-soft:#FCE4EC;
+  --good:#C2185B; --good-bg:#FCE4EC; --warn-bg:#FEF3C7; --warn-fg:#92400E; --ring:#880E4F;
+  --hero-a:#880E4F; --hero-b:#D81B60; --hero-glow:rgba(240,98,146,.55); --mark:#F8BBD0;
+  --shadow:0 1px 2px rgba(136,14,79,.07),0 4px 14px rgba(136,14,79,.07);
+  --r-md:12px; --r-lg:16px; --t:160ms;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#1B0912; --card:#27101B; --fg:#FCE4EC; --muted:#DDAEC0; --border:#4D2238; --soft:#341727;
+    --primary:#F8BBD0; --on-primary:#2B0A1A; --accent:#F06292; --on-accent:#2B0A1A; --accent-strong:#F48FB1; --accent-soft:#3D1529;
+    --good:#F48FB1; --good-bg:#3D1529; --warn-bg:#3B2F12; --warn-fg:#FCD34D; --ring:#F8BBD0;
+    --hero-a:#3D0823; --hero-b:#880E4F; --hero-glow:rgba(216,27,96,.5); --mark:#AD1457;
+    --shadow:0 1px 2px rgba(0,0,0,.45);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+    --bg:#1B0912; --card:#27101B; --fg:#FCE4EC; --muted:#DDAEC0; --border:#4D2238; --soft:#341727;
+    --primary:#F8BBD0; --on-primary:#2B0A1A; --accent:#F06292; --on-accent:#2B0A1A; --accent-strong:#F48FB1; --accent-soft:#3D1529;
+    --good:#F48FB1; --good-bg:#3D1529; --warn-bg:#3B2F12; --warn-fg:#FCD34D; --ring:#F8BBD0;
+    --hero-a:#3D0823; --hero-b:#880E4F; --hero-glow:rgba(216,27,96,.5); --mark:#AD1457;
+    --shadow:0 1px 2px rgba(0,0,0,.45);
+    color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);
+  font:18px/1.65 "Sarabun","Leelawadee UI","Noto Sans Thai Looped","Noto Sans Thai",Tahoma,system-ui,sans-serif}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer;touch-action:manipulation}
+button:disabled{cursor:not-allowed}
+:focus-visible{outline:3px solid var(--ring);outline-offset:2px;border-radius:8px}
+h1,h2,.price-big,.o-price b{font-family:"Sarabun","Leelawadee UI","Noto Sans Thai Looped","Noto Sans Thai",Tahoma,system-ui,sans-serif;letter-spacing:0}
+.wrap{max-width:860px;margin-inline:auto;padding-inline:20px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:-999px;top:8px;background:var(--card);color:var(--fg);padding:8px 14px;border-radius:8px;z-index:50}
+.skip:focus{left:8px}
+svg.ic{width:22px;height:22px;flex:none;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* ---------- hero ---------- */
+.hero{color:#fff;background:radial-gradient(700px 300px at 90% -20%,var(--hero-glow),transparent 62%),linear-gradient(135deg,var(--hero-a),var(--hero-b))}
+.hero .wrap{padding-top:28px;padding-bottom:28px}
+.brand{font-size:14.5px;font-weight:600;letter-spacing:.05em;color:#FCE4EC}
+h1{font-size:clamp(26px,5vw,36px);line-height:1.25;margin:4px 0 16px;font-weight:700}
+h1 em{font-style:normal;color:#F8BBD0}
+.search{position:relative}
+.search .ic{position:absolute;left:18px;top:50%;transform:translateY(-50%);color:#8A6577;pointer-events:none}
+.search input{width:100%;height:60px;padding:0 56px 0 52px;border:2px solid transparent;border-radius:16px;background:#fff;color:#2B0A1A;
+  font-size:18px;outline:none;box-shadow:0 12px 32px rgba(0,0,0,.3);transition:border-color var(--t),box-shadow var(--t)}
+.search input::placeholder{color:#8A6577}
+.search input:focus{border-color:#F48FB1;box-shadow:0 12px 32px rgba(0,0,0,.3),0 0 0 5px rgba(248,187,208,.55)}
+.search input::-webkit-search-cancel-button{display:none}
+.search button{position:absolute;right:8px;top:8px;width:44px;height:44px;border:0;border-radius:10px;background:none;color:#6D4458;display:none;align-items:center;justify-content:center}
+.search button:hover{background:#FCE4EC}
+
+/* ---------- steps ---------- */
+.steps{background:var(--card);border-bottom:1px solid var(--border)}
+.steps ol{list-style:none;margin:0;padding:10px 0;display:flex;align-items:center;gap:6px}
+.steps li{display:flex;align-items:center;gap:6px;min-width:0}
+.steps li+li::before{content:"";width:18px;height:2px;background:var(--border);flex:none}
+.step{display:flex;align-items:center;gap:8px;border:0;background:none;padding:6px 10px 6px 6px;border-radius:999px;min-height:40px;color:var(--muted);font-size:16.5px;font-weight:500;white-space:nowrap}
+.step i{font-style:normal;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--soft);font-weight:700;font-size:15.5px;flex:none}
+.step[aria-current]{color:var(--fg);font-weight:600}
+.step[aria-current] i{background:var(--accent);color:var(--on-accent)}
+.step.done i{background:var(--good-bg);color:var(--good)}
+button.step:hover{background:var(--soft);color:var(--fg)}
+
+/* ---------- content ---------- */
+main{padding:24px 0 64px;min-height:55vh}
+h2{font-size:25px;line-height:1.35;margin:0 0 4px;font-weight:600}
+.sub{color:var(--muted);margin:0 0 20px;font-size:17px}
+.back{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--border);background:var(--card);border-radius:999px;padding:0 16px 0 10px;min-height:44px;font-size:17px;font-weight:500;margin-bottom:14px;box-shadow:var(--shadow)}
+.back:hover{border-color:var(--fg)}
+
+.cat-h{display:flex;align-items:center;gap:10px;margin:22px 0 10px;font-size:16.5px;font-weight:600;color:var(--muted)}
+.cat-h::after{content:"";flex:1;height:1px;background:var(--border)}
+.fam-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}
+.fam{display:flex;align-items:center;gap:12px;text-align:left;background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);padding:12px 14px;min-height:68px;box-shadow:var(--shadow);transition:border-color var(--t),transform var(--t)}
+.fam:hover{border-color:var(--accent);transform:translateY(-2px)}
+.fam-ic{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;color:var(--accent-strong);background:var(--accent-soft);flex:none}
+.fam-ic .ic{width:26px;height:26px;stroke-width:1.7}
+.fam span{flex:1;min-width:0}
+.fam b{display:block;font-size:17px;font-weight:600;line-height:1.3}
+.fam small{color:var(--muted);font-size:15px}
+.fam>.ic{color:var(--muted)}
+
+.years{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px}
+.chip{border:1px solid var(--border);background:var(--card);border-radius:999px;padding:0 16px;min-height:42px;font-size:16.5px;color:var(--muted);transition:all var(--t)}
+.chip:hover{border-color:var(--fg);color:var(--fg)}
+.chip[aria-pressed=true]{background:var(--primary);border-color:var(--primary);color:var(--on-primary);font-weight:600}
+.list{background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow)}
+.row{width:100%;display:flex;align-items:center;gap:12px;text-align:left;border:0;background:none;padding:12px 16px;min-height:64px;transition:background var(--t)}
+.row+.row{border-top:1px solid var(--border)}
+.row:hover{background:var(--soft)}
+.row span{flex:1;min-width:0}
+.row b{display:block;font-weight:600;font-size:17.5px;line-height:1.35;overflow-wrap:anywhere}
+.row small{color:var(--muted);font-size:15.5px;font-variant-numeric:tabular-nums}
+.row .ic{color:var(--muted)}
+.more{display:flex;margin:16px auto 0}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--border);background:var(--card);border-radius:12px;padding:0 18px;min-height:48px;font-weight:600;font-size:17px;transition:border-color var(--t)}
+.btn:hover{border-color:var(--fg)}
+.empty{text-align:center;padding:44px 16px;color:var(--muted);background:var(--card);border:1px dashed var(--border);border-radius:var(--r-lg)}
+.empty b{display:block;color:var(--fg);font-size:19px;margin-bottom:4px}
+.empty .btn{margin-top:14px}
+
+/* ---------- detail ---------- */
+.car{background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);padding:18px;box-shadow:var(--shadow);margin-bottom:16px}
+.car small{display:block;color:var(--muted);font-size:15.5px}
+.car h2{margin:2px 0 6px;overflow-wrap:anywhere}
+.car p{margin:0;color:var(--muted);font-size:17px}
+.car p b{color:var(--fg);font-variant-numeric:tabular-nums}
+.pick{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
+.pick>div>span{display:block;font-size:15.5px;font-weight:600;color:var(--muted);margin-bottom:6px}
+.seg{display:flex;flex-wrap:wrap;background:var(--soft);border-radius:12px;padding:4px;gap:4px}
+.seg button{flex:1 1 130px;border:0;background:none;border-radius:9px;min-height:46px;padding:0 8px;font-size:17px;font-weight:500;color:var(--muted);transition:background var(--t),color var(--t)}
+.seg button:hover:not(:disabled){color:var(--fg)}
+.seg button[aria-pressed=true]{background:var(--card);color:var(--fg);font-weight:700;box-shadow:var(--shadow)}
+.seg button:disabled{opacity:.45;text-decoration:line-through}
+.answer{display:flex;align-items:center;gap:14px;background:var(--good-bg);border:1.5px solid var(--good);border-radius:var(--r-lg);padding:16px 18px;margin-bottom:16px}
+.answer .ic{color:var(--good);width:30px;height:30px}
+.answer small{display:block;font-size:15.5px;color:var(--fg)}
+.answer strong{display:block;font-size:18px;line-height:1.35}
+.price-big{margin-left:auto;text-align:right;font-size:28px;font-weight:700;line-height:1.1;font-variant-numeric:tabular-nums;white-space:nowrap}
+.price-big small{font:500 15px/1.4 "Sarabun","Leelawadee UI","Noto Sans Thai Looped","Noto Sans Thai",Tahoma,system-ui,sans-serif;color:var(--fg)}
+.offers{list-style:none;margin:0;padding:0;background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow)}
+.offer{display:grid;grid-template-columns:34px 1fr auto;gap:2px 12px;align-items:center;padding:14px 16px}
+.offer+.offer{border-top:1px solid var(--border)}
+.rank{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--soft);color:var(--muted);font-weight:700;font-size:16.5px}
+.offer.best .rank{background:var(--good);color:var(--card)}
+.o-name{font-weight:600;font-size:17px;display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.o-sub{display:block;font-size:15.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.o-price{text-align:right;white-space:nowrap}
+.o-price b{display:block;font-size:20px;font-weight:700;font-variant-numeric:tabular-nums}
+.o-price small{display:block;font-size:15px;color:var(--muted);font-variant-numeric:tabular-nums}
+.tag{display:inline-block;font-size:14px;font-weight:700;border-radius:6px;padding:1px 8px;line-height:1.5;background:var(--good);color:var(--card)}
+.na{display:inline-block;background:var(--warn-bg);color:var(--warn-fg);border-radius:6px;padding:3px 10px;font-size:15.5px;font-weight:600}
+.code-h{font-size:16px;font-weight:600;color:var(--muted);margin:18px 0 8px}
+.notes{margin:16px 0 0;padding:12px 14px;background:var(--soft);border-radius:var(--r-md);font-size:16px;color:var(--muted)}
+.notes p{margin:0 0 4px;font-weight:600;color:var(--fg)}
+.notes div{margin:3px 0;overflow-wrap:anywhere}
+.notes b{color:var(--fg);font-weight:600}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.actions .btn{flex:1;min-width:200px}
+mark{background:var(--mark);color:var(--fg);border-radius:3px;padding:0 2px}
+footer{border-top:1px solid var(--border);color:var(--muted);font-size:15.5px;padding:18px 0 40px}
+footer p{margin:0 0 4px}
+
+/* ---------- per-page usability ---------- */
+.steps{position:sticky;top:env(safe-area-inset-top,0px);z-index:10}
+body.inner .hero .wrap{padding-block:14px}
+body.inner .brand,body.inner h1{display:none}
+body.inner .search input{height:50px;font-size:17.5px;box-shadow:none}
+body.inner .search button{top:3px}
+.filter{position:relative;margin:0 0 12px}
+.filter .ic{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--muted)}
+.filter input{width:100%;height:50px;border:1.5px solid var(--border);border-radius:12px;background:var(--card);padding:0 14px 0 46px;font-size:17.5px;outline:none}
+.filter input:focus{border-color:var(--accent)}
+.row em{font-style:normal;text-align:right;white-space:nowrap;font-size:14.5px;color:var(--muted)}
+.row em b{display:block;font-size:17px;font-weight:700;color:var(--fg);font-variant-numeric:tabular-nums}
+.hint{font-size:15px;color:var(--muted);margin:6px 2px 0}
+
+/* ---------- our own controls (no browser-default widgets) ---------- */
+[hidden]{display:none!important}
+html{scrollbar-width:thin;scrollbar-color:var(--border) transparent}
+::selection{background:var(--mark);color:var(--fg)}
+input{-webkit-appearance:none;appearance:none}
+.filter input{padding-right:50px}
+.filter button{position:absolute;right:4px;top:3px;width:44px;height:44px;border:0;border-radius:10px;background:none;color:var(--muted);display:flex;align-items:center;justify-content:center}
+.filter button:hover{background:var(--soft);color:var(--fg)}
+.dds{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin:0 0 14px}
+.dd{position:relative;min-width:0}
+.dd-pop button:disabled{opacity:.45}
+.flt{display:flex;align-items:center;justify-content:space-between;gap:4px 12px;flex-wrap:wrap;background:var(--warn-bg);color:var(--warn-fg);border-radius:12px;padding:6px 8px 6px 16px;margin-bottom:24px;font-size:16px}
+.flt button{border:0;background:none;color:inherit;font-weight:700;text-decoration:underline;min-height:44px;padding:0 8px}
+.dd-btn{width:100%;display:flex;align-items:center;gap:12px;text-align:left;min-height:58px;padding:8px 14px 8px 16px;border:1.5px solid var(--border);border-radius:12px;background:var(--card);transition:border-color var(--t)}
+.dd-btn:hover,.dd-btn[aria-expanded=true]{border-color:var(--accent)}
+.dd-btn span{flex:1;min-width:0;font-weight:600;font-size:17px;line-height:1.35;overflow-wrap:anywhere}
+.dd-btn small{display:block;font-weight:500;font-size:14px;color:var(--muted)}
+.dd-btn .ic{color:var(--muted);transition:transform var(--t)}
+.dd-btn[aria-expanded=true] .ic{transform:rotate(180deg)}
+.dd-pop{position:absolute;z-index:20;left:0;right:0;top:calc(100% + 6px);max-height:min(60vh,420px);overflow-y:auto;background:var(--card);border:1.5px solid var(--border);border-radius:14px;padding:6px;box-shadow:0 16px 40px rgba(136,14,79,.22)}
+.dd-pop button{width:100%;display:flex;align-items:center;gap:12px;text-align:left;border:0;background:none;border-radius:10px;padding:10px 12px;min-height:48px;font-size:17px;line-height:1.35}
+.dd-pop button span{flex:1;min-width:0;overflow-wrap:anywhere}
+.dd-pop button small{color:var(--muted);font-size:14.5px;white-space:nowrap}
+.dd-pop button:hover,.dd-pop button:focus-visible{background:var(--soft)}
+.dd-pop button[aria-selected=true]{background:var(--accent-soft);color:var(--accent-strong);font-weight:700}
+.o-more{display:inline-flex;align-items:center;gap:4px;border:0;background:none;padding:0;margin-top:4px;min-height:32px;font-size:15px;font-weight:500;color:var(--accent-strong)}
+.o-more .ic{width:16px;height:16px;transition:transform var(--t)}
+.o-more[aria-expanded=true] .ic{transform:rotate(180deg)}
+.o-det{font-size:15.5px;color:var(--muted);font-variant-numeric:tabular-nums;padding-bottom:2px}
+
+/* ---------- spacing rhythm: 8 / 12 / 16 / 24 / 32 ---------- */
+main{padding-block:32px 80px}
+.hero .wrap{padding-block:32px}
+.steps ol{padding:12px 0}
+h2{margin:0 0 8px}
+.sub{margin:0 0 24px}
+.back{margin-bottom:20px}
+.cat-h{margin:32px 0 14px}
+.fam-grid{gap:14px}
+.fam{padding:16px;gap:14px}
+.filter{margin:0 0 14px}
+.years{margin:0 0 20px;gap:10px}
+#rows>.sub{margin:8px 0 4px}
+.row{padding:16px 18px;gap:16px}
+.row small{display:block;margin-top:4px}
+.row em{padding-left:8px}
+.car{padding:22px;margin-bottom:24px}
+.car h2{margin:4px 0 10px}
+.pick{gap:20px;margin-bottom:24px}
+.pick>div>span{margin-bottom:8px}
+.answer{padding:20px 22px;gap:16px;margin-bottom:32px}
+.answer strong{margin:2px 0}
+.code-h{margin:0 0 12px}
+.offers+.code-h{margin-top:28px}
+.offer{padding:18px;gap:4px 16px}
+.o-sub{margin-top:4px}
+.o-price small{margin-top:2px}
+.notes{margin-top:24px;padding:16px 18px}
+.notes div{margin:6px 0}
+.actions{margin-top:28px}
+.hint{margin:16px 2px 0;line-height:1.6}
+.more{margin-top:24px}
+footer{padding:28px 0 48px}
+footer p{margin:0 0 8px}
+
+/* ---------- model-year group: one card, header bar sticks while its rows scroll ---------- */
+.grp{margin-top:24px}
+.grp-h{position:sticky;top:calc(env(safe-area-inset-top,0px) + var(--steps-h,0px));z-index:5;display:flex;align-items:center;justify-content:space-between;gap:12px;
+  margin:0;padding:12px 18px;background:var(--primary);color:var(--on-primary);border-radius:var(--r-lg) var(--r-lg) 0 0;font-size:17px;font-weight:700;line-height:1.35;
+  box-shadow:0 6px 12px -8px rgba(43,10,26,.55)}
+.grp-h span{min-width:0;overflow-wrap:anywhere}
+.grp-h small{flex:none;font-size:14px;font-weight:600;background:rgba(255,255,255,.18);border-radius:999px;padding:2px 12px;white-space:nowrap}
+.grp .list{border-top:0;border-radius:0 0 var(--r-lg) var(--r-lg);overflow:visible}
+.grp .row:last-child{border-radius:0 0 var(--r-lg) var(--r-lg)}
+
+/* ---------- "updated on" badge in the header ---------- */
+.brand{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin-bottom:8px}
+.asof-pill{display:inline-flex;align-items:center;gap:7px;background:#fff;color:#880E4F;border-radius:999px;padding:5px 16px 5px 11px;font-size:15.5px;font-weight:600;letter-spacing:0;line-height:1.4;box-shadow:0 6px 18px rgba(43,10,26,.35)}
+.asof-pill .ic{width:18px;height:18px;color:#D81B60}
+.asof-pill b{font-weight:700;font-size:16.5px;font-variant-numeric:tabular-nums}
+
+/* ---------- update-from-PDF screen ---------- */
+body.admin .steps{display:none}
+.link{border:0;background:none;color:var(--accent-strong);font:inherit;font-weight:600;text-decoration:underline;min-height:44px;padding:0}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.btn.primary:hover{filter:brightness(.92);border-color:var(--accent)}
+.drop{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;cursor:pointer;background:var(--card);border:2px dashed var(--border);border-radius:var(--r-lg);padding:36px 20px;margin-bottom:20px;transition:border-color var(--t),background var(--t)}
+.drop:hover,.drop.over{border-color:var(--accent);background:var(--accent-soft)}
+.drop .ic{width:36px;height:36px;color:var(--accent-strong)}
+.drop b{font-size:18px}
+.drop span{color:var(--muted);font-size:15px}
+.adm-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);padding:18px 20px;margin-bottom:16px;box-shadow:var(--shadow)}
+.adm-card p{margin:0 0 6px}
+.adm-card ul{margin:6px 0 0;padding-left:20px}
+.adm-card li{margin:4px 0}
+.adm-card.ok{border-color:var(--good);background:var(--good-bg)}
+.adm-card.warn,.adm-card.bad{background:var(--warn-bg);color:var(--warn-fg);border-color:transparent}
+.adm-bar{height:10px;border-radius:5px;background:var(--soft);overflow:hidden;margin:10px 0}
+.adm-bar i{display:block;height:100%;width:0;background:var(--accent);border-radius:5px;transition:width .2s}
+.cmp{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.cmp th,.cmp td{padding:10px 8px;text-align:right;border-bottom:1px solid var(--border)}
+.cmp th:first-child{text-align:left;font-weight:500;color:var(--muted)}
+.cmp thead th{font-size:14.5px;color:var(--muted);font-weight:600}
+.cmp tbody tr:last-child th,.cmp tbody tr:last-child td{border-bottom:0}
+.cmp td.chg{font-weight:700;color:var(--accent-strong)}
+
+.fld{display:flex;flex-direction:column;gap:6px;font-weight:600;margin-bottom:14px}
+.fld input{font:inherit;font-weight:400;min-height:48px;padding:0 14px;border:1.5px solid var(--border);border-radius:var(--r);background:var(--card);color:var(--text)}
+.fld input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+
+/* ---------- phone + tablet (touch) ---------- */
+html{-webkit-tap-highlight-color:transparent}
+body{overflow-wrap:break-word}
+.wrap{padding-inline:max(20px,env(safe-area-inset-left,0px)) max(20px,env(safe-area-inset-right,0px))}
+footer{padding-bottom:calc(48px + env(safe-area-inset-bottom,0px))}
+button:active:not(:disabled){opacity:.72}
+.step,.chip,.o-more{min-height:44px}
+.step{min-width:44px;justify-content:center}
+.seg button{min-height:48px}
+@media (hover:none){
+  .fam:hover{transform:none;border-color:var(--border)}
+  .row:hover,.dd-pop button:hover{background:none}
+  .chip:hover{border-color:var(--border);color:var(--muted)}
+  .chip[aria-pressed=true]:hover{border-color:var(--primary);color:var(--on-primary)}
+  .back:hover,.btn:hover{border-color:var(--border)}
+  .fam:active,.row:active,.dd-pop button:active{background:var(--soft);opacity:1}
+}
+/* tablet portrait + landscape (iPad) */
+@media (min-width:641px) and (max-width:1100px){
+  .wrap{max-width:920px;padding-inline:max(28px,env(safe-area-inset-left,0px)) max(28px,env(safe-area-inset-right,0px))}
+  .fam-grid{grid-template-columns:repeat(3,1fr)}
+  .fam{min-height:76px}
+  .row{min-height:72px}
+}
+/* phone held sideways: keep content on screen instead of chrome */
+@media (max-height:480px) and (orientation:landscape){
+  .hero .wrap{padding-block:12px}
+  .brand{display:none}
+  h1{font-size:22px;margin:0 0 10px}
+  .search input{height:48px}
+  .search button{top:2px}
+  .steps{position:static}
+  .dd-pop{max-height:70vh}
+  .fam-grid{grid-template-columns:repeat(3,1fr)}
+}
+
+@media (max-width:640px){
+  body{font-size:17px}
+  .wrap{padding-inline:max(16px,env(safe-area-inset-left,0px)) max(16px,env(safe-area-inset-right,0px))}
+  main{padding-block:24px 64px}
+  .hero .wrap{padding-block:24px}
+  .cat-h{margin:28px 0 12px}
+  .fam-grid{gap:12px}
+  .row{padding:14px 16px;gap:12px}
+  .grp-h{padding:10px 16px;font-size:16px}
+  .car{padding:18px}
+  .answer{padding:18px}
+  .step{font-size:15.5px;padding-right:6px}
+  .step span{display:none}
+  .step[aria-current] span{display:inline}
+  .fam-grid{grid-template-columns:1fr 1fr}
+  .fam{flex-direction:column;align-items:flex-start;gap:10px;padding:14px}
+  .fam>.ic{display:none}
+  .fam b{font-size:17px}
+  .actions .btn{min-width:0}
+  .pick{grid-template-columns:1fr}
+  .answer{flex-wrap:wrap}
+  .price-big{margin-left:44px;text-align:left;flex-basis:100%}
+  .offer{padding:16px 14px;gap:4px 12px}
+  .o-price b{font-size:18px}
+}
+@media (max-width:359px){
+  .fam-grid{grid-template-columns:1fr}
+  .fam{flex-direction:row;align-items:center}
+  h1{font-size:24px}
+  .price-big{font-size:24px}
+  .row em b{font-size:16.5px}
+  .seg button{flex-basis:100%}
+}
+/* ---------- feedback after choosing a filter ---------- */
+@keyframes fxIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes fxRing{0%{box-shadow:0 0 0 0 rgba(216,27,96,.55)}100%{box-shadow:0 0 0 12px rgba(216,27,96,0)}}
+@keyframes fxMark{0%,35%{background:var(--mark);box-shadow:0 0 0 5px var(--mark)}100%{background:transparent;box-shadow:0 0 0 5px transparent}}
+.dd-btn.fx{animation:fxRing .7s ease-out;border-color:var(--accent)}
+#rows.fx,.answer.fx,.offers.fx,.code-h.fx,.flt.fx{animation:fxIn .34s ease-out}
+#rows.fx>.sub{animation:fxMark 1.3s ease-out;border-radius:6px}
+#rows.fx .row em b,.offers.fx .o-price b,.answer.fx .price-big{border-radius:6px;animation:fxMark 1.3s ease-out}
+@media (prefers-reduced-motion: reduce){ *{transition:none!important;animation:none!important} }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">ข้ามไปที่เนื้อหา</a>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="brand"><span>TOYOTA CARE · ประกันภัยชั้นหนึ่ง</span><span class="asof-pill"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>อัปเดตวันที่ <b data-asof>16.09.2026</b></span></div>
+    <h1>เช็กเบี้ยประกัน<em>ตามรุ่นรถ</em></h1>
+    <div class="search" role="search">
+      <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <label class="sr" for="q">ค้นหารุ่นรถ</label>
+      <input id="q" type="text" inputmode="search" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search" placeholder="พิมพ์ชื่อรุ่นรถ เช่น fortuner legender">
+      <button id="clr" type="button" aria-label="ล้างคำค้น"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<nav class="steps" aria-label="ขั้นตอน"><div class="wrap"><ol id="steps"></ol></div></nav>
+
+<main class="wrap" id="main" tabindex="-1"><div id="view"></div></main>
+
+<footer><div class="wrap">
+  <p>เครื่องมือช่วยค้นหาสำหรับใช้ภายในทีม ไม่ใช่เว็บไซต์ทางการของโตโยต้าหรือบริษัทประกัน</p>
+  <p>ที่มา: เอกสาร “อัตราเบี้ยประกันภัยชั้นหนึ่ง TOYOTA CARE” update as of <span data-asof>16.09.2026</span></p>
+  <p id="updBox" hidden><button type="button" class="link" data-adm="open">อัปเดตข้อมูลจากไฟล์ PDF</button></p>
+  <p>เบี้ยที่แสดงคือเบี้ยรวม (รวมอากรและภาษีแล้ว) ต่อปี · โปรดยืนยันกับเอกสารต้นฉบับหรือบริษัทประกันก่อนออกใบเสนอราคา</p>
+</div></footer>
+
+<script src="config.js"></script>
+<script>
+/*__PDFPARSE__*/
+/*__UPDATER__*/
+let DATA = /*__DATA__*/;
+const BASE = DATA;   // ข้อมูลตั้งต้นที่มากับหน้าเว็บ
+const PERSONAL = new Set(["110","210","E11"]);
+const USE_LABEL = {p: 'ส่วนบุคคล', c: 'เชิงพาณิชย์'};
+const FAMILIES = [
+  [/^gr |gr (yaris|corolla|supra)/, 'GR Sport'], [/yaris cross/, 'Yaris Cross'], [/yaris ativ/, 'Yaris Ativ'], [/yaris/, 'Yaris'],
+  [/vios/, 'Vios'], [/corolla cross/, 'Corolla Cross'], [/altis/, 'Corolla Altis'], [/camry/, 'Camry'], [/c-hr/, 'C-HR'],
+  [/champ/, 'Hilux Champ'], [/travo/, 'Hilux Travo'], [/revo/, 'Hilux Revo'], [/fortuner/, 'Fortuner'], [/land cruiser/, 'Land Cruiser FJ'],
+  [/innova/, 'Innova'], [/veloz/, 'Veloz'], [/avanza/, 'Avanza'], [/sienta/, 'Sienta'],
+  [/alphard/, 'Alphard'], [/vel+fire/, 'Vellfire'], [/majesty/, 'Majesty'],
+  [/commuter/, 'Commuter'], [/hiace/, 'Hiace'], [/ventury/, 'Ventury'], [/coaster/, 'Coaster'], [/bz4/, 'bZ4X']
+];
+const CATS = [
+  ['รถเก๋ง', 'sedan', ['Yaris Ativ','Yaris','Vios','Corolla Altis','Camry']],
+  ['SUV / ครอสโอเวอร์', 'suv', ['Yaris Cross','Corolla Cross','C-HR','Fortuner','Land Cruiser FJ']],
+  ['กระบะ', 'pickup', ['Hilux Revo','Hilux Travo','Hilux Champ']],
+  ['MPV / รถตู้', 'van', ['Innova','Veloz','Avanza','Sienta','Alphard','Vellfire','Majesty','Commuter','Hiace','Ventury','Coaster']],
+  ['รถไฟฟ้า / สปอร์ต', 'bolt', ['bZ4X','GR Sport','อื่น ๆ']]
+];
+const WHEELS = '<circle cx="7.5" cy="16.5" r="2"/><circle cx="16.5" cy="16.5" r="2"/><path d="M9.5 16.5h5"/>';
+const CAR = {
+  sedan: '<path d="M5.5 16.5h-3V13l3-1.2L8 8h7.5l3 3.8 3 1.2v3.5h-3"/>' + WHEELS,
+  suv: '<path d="M5.5 16.5h-3V11l2-4h11l3.5 4 2.5 1v4.5h-3"/><path d="M3 11h16"/>' + WHEELS,
+  pickup: '<path d="M5.5 16.5h-3V12l2-4.5H11V12h10.5v4.5h-3"/><path d="M11 12H2.5"/>' + WHEELS,
+  van: '<path d="M5.5 16.5h-3v-9h13l5 4.5v4.5h-2"/><path d="M15.5 7.5V12h5"/>' + WHEELS,
+  bolt: '<path d="M13 3 5 13.5h6L10 21l8-10.5h-6z"/>'
+};
+const svg = (inner, cls = '') => `<svg class="ic ${cls}" viewBox="0 0 24 24" aria-hidden="true">${inner}</svg>`;
+const ICON = {
+  next: svg('<path d="m9 6 6 6-6 6"/>'), down: svg('<path d="m6 9 6 6 6-6"/>'), x: svg('<path d="M6 6l12 12M18 6 6 18"/>'), back: svg('<path d="m15 18-6-6 6-6"/>'),
+  check: svg('<circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/>')
+};
+const PAGE = 40;
+
+const $ = id => document.getElementById(id);
+const norm = s => s.toLowerCase().replace(/\s+/g, ' ').trim();
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmt0 = n => n == null ? '–' : n.toLocaleString('en-US');
+const fmt2 = n => n == null ? '–' : n.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+const famOf = m => { const k = m.toLowerCase(); for (const [re, n] of FAMILIES) if (re.test(k)) return n; return 'อื่น ๆ'; };
+const useOf = code => PERSONAL.has(code) ? 'p' : 'c';
+const naText = o => o.st === 'ไม่รับ' ? 'ไม่รับประกัน' : (o.st || 'ไม่มีเบี้ยในเอกสาร');
+
+// รถ 1 คัน = รุ่นรถ + รุ่นย่อย + ราคาขาย แล้วรวมเบี้ยของทุกบริษัทไว้ด้วยกัน
+const vehicles = [], vmap = new Map(), famCount = new Map();
+let SHORT = new Map();
+const keyOf = s => s.toLowerCase().replace(/[\s\u0E31\u0E34-\u0E3A\u0E47-\u0E4E]/g, '');   // ไม่สนช่องว่างและสระบน/ล่าง กันชื่อเดียวกันถูกนับเป็นคนละคัน
+function setData(D) {
+  DATA = D; vehicles.length = 0; vmap.clear(); famCount.clear();
+  D.sec.forEach(([ins, model, code, phyd, notes, rows]) => {
+    rows.forEach(([n, p, s, net, g, pg, st]) => {
+      const key = keyOf(model) + '|' + keyOf(n) + '|' + p;
+      let v = vmap.get(key);
+      if (!v) { v = {id: vehicles.length, model, fam: famOf(model), n, p, hay: norm(model + ' ' + n), offers: [], seen: new Set()}; vmap.set(key, v); vehicles.push(v); }
+      const ok = [ins, code, phyd, s, net, g, st].join('|');
+      if (v.seen.has(ok)) return;
+      v.seen.add(ok);
+      v.offers.push({ins, code, phyd, s, net, g, pg, st, notes});
+    });
+  });
+  SHORT = buildShortNames([...new Set(vehicles.map(v => v.model))]);
+  vehicles.forEach(v => famCount.set(v.fam, (famCount.get(v.fam) || 0) + 1));
+}
+// ชื่อสั้น = ชื่อรุ่น + ปี (ตัดคำอย่าง New / Toyota / Improvement / MC ออก) ชื่อเต็มยังแสดงในหน้าดูเบี้ย
+function shortParts(m) {
+  let s = m; const tags = [];
+  const take = re => { s = s.replace(re, x => { tags.push(x.trim()); return ' '; }); };
+  take(/\((?:New Price|REVO|DG7|BEV car)[^)]*\)/gi);
+  take(/Eff\.\s*[\d/]+/i);
+  take(/ยกเว้น.*$/);
+  let seats = '';
+  s = s.replace(/\((1\+\d+)\s*ที่นั่ง\)/, (x, n) => { seats = ' · ' + n + ' ที่นั่ง'; return ' '; });
+  s = s.replace(/\(EV\)/, ' EV ');
+  take(/\b(?:Full Model Change|Minor Change|Improvement|FMC|MC|MY|IMP\.?|Imp\.?)(?=[\s'.\d]|$)/gi);
+  take(/^\s*New\b/i);
+  s = s.replace(/\b(?:Toyota|Model)\b/g, ' ').replace(/\s-\s*/g, ' ');
+  s = s.replace(/'\s*(\d\d)\b/, ' 20$1').replace(/\s+/g, ' ').trim().replace(/(^|\s)(\d\d)$/, '$120$2');
+  let year = '';
+  s = s.replace(/\b(20\d\d)\b/, y => { year = ' ' + y; return ' '; });
+  s = s.replace(/\bALPHARD\b/, 'Alphard').replace(/\b(?:VELLFIRE|Velfire)\b/, 'Vellfire').replace(/\s+/g, ' ').trim();
+  return {label: s + year + seats, tags};
+}
+function buildShortNames(models) {
+  const parts = new Map(models.map(m => [m, shortParts(m)]));
+  const groups = new Map();
+  parts.forEach((p, m) => (groups.get(p.label) || groups.set(p.label, []).get(p.label)).push(m));
+  const out = new Map();
+  groups.forEach((ms, label) => {
+    if (ms.length === 1) return out.set(ms[0], label);
+    const count = new Map();
+    ms.forEach(m => new Set(parts.get(m).tags.map(t => t.toLowerCase())).forEach(t => count.set(t, (count.get(t) || 0) + 1)));
+    const labels = ms.map(m => { const own = parts.get(m).tags.filter(t => count.get(t.toLowerCase()) < ms.length); return own.length ? `${label} (${own.map(x => x.replace(/^\(|\)$/g, '')).join(' ')})` : label; });
+    const clash = new Set(labels).size < labels.length;
+    ms.forEach((m, i) => out.set(m, clash ? m : labels[i]));
+  });
+  return out;
+}
+const sn = m => SHORT.get(m) || m;
+// เรียงรุ่นปีจากใหม่ไปเก่า รุ่นที่เอกสารไม่ระบุปีอยู่ท้ายสุด
+const yearOf = m => { const y = /(20\d\d)/.exec(sn(m)); return y ? +y[1] : 0; };
+const byYear = (a, b) => yearOf(b) - yearOf(a) || sn(a).localeCompare(sn(b), 'en');
+setData(DATA);
+
+const state = {q: '', fam: '', model: '', f: '', ins: null, vid: null, use: 'p', code: null, phyd: 0, shown: PAGE, admin: false};
+const recent = {
+  get() { try { return (JSON.parse(localStorage.getItem('tc_recent:' + (DATA.v || 'base'))) || []).filter(i => vehicles[i]); } catch (e) { return []; } },
+  add(id) { try { localStorage.setItem('tc_recent:' + (DATA.v || 'base'), JSON.stringify([id, ...this.get().filter(i => i !== id)].slice(0, 3))); } catch (e) {} }
+};
+
+/* ---------- navigation (ปุ่มย้อนกลับของเบราว์เซอร์ใช้ได้) ---------- */
+function readHash() {
+  const p = new URLSearchParams(location.hash.slice(1));
+  state.q = p.get('q') || ''; state.fam = famCount.has(p.get('f')) ? p.get('f') : ''; state.model = p.get('m') || '';
+  const v = parseInt(p.get('v'), 10); state.vid = vehicles[v] ? v : null;
+  const i = parseInt(p.get('i'), 10); state.ins = DATA.ins[i] ? i : null;
+  if (p.has('c')) { state.code = p.get('c'); state.use = useOf(state.code); }
+  if (p.get('ph')) state.phyd = p.get('ph') === '1' ? 1 : 0;
+}
+function hashOf() {
+  const p = new URLSearchParams();
+  if (state.q) p.set('q', state.q); if (state.fam) p.set('f', state.fam); if (state.model) p.set('m', state.model); if (state.ins != null) p.set('i', state.ins);
+  if (state.vid != null) { p.set('v', state.vid); p.set('c', pick(vehicles[state.vid]).code); p.set('ph', state.phyd); }
+  const h = p.toString();
+  return h ? '#' + h : location.pathname + location.search;
+}
+function go(patch, push = true) {
+  Object.assign(state, patch, {shown: PAGE});
+  try { history[push ? 'pushState' : 'replaceState'](null, '', hashOf()); } catch (e) {}
+  render();
+  if (push) scrollTo(0, 0);
+}
+window.addEventListener('popstate', () => { readHash(); state.shown = PAGE; render(); });
+
+function hl(text, toks) {
+  let out = esc(text);
+  toks.forEach(t => {
+    const re = new RegExp('(' + t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')(?![^<]*>)', 'ig');
+    out = out.replace(re, '<mark>$1</mark>');
+  });
+  return out;
+}
+
+/* ---------- step 1: เลือกรุ่นรถ ---------- */
+function homeHtml() {
+  const rc = recent.get();
+  const rcHtml = rc.length ? `<h3 class="cat-h">ดูล่าสุด</h3><div class="list">${rc.map(i => rowHtml(vehicles[i], [], true)).join('')}</div>` : '';
+  return `<h2>เลือกรุ่นรถของคุณ</h2><p class="sub">แตะรุ่นรถด้านล่าง หรือพิมพ์ชื่อรุ่นในช่องค้นหาด้านบน</p>` + rcHtml
+    + CATS.map(([title, icon, names]) => {
+      const fs = names.filter(n => famCount.has(n));
+      return fs.length ? `<h3 class="cat-h">${esc(title)}</h3><div class="fam-grid">${fs.map(n =>
+        `<button type="button" class="fam" data-fam="${esc(n)}"><i class="fam-ic">${svg(CAR[icon])}</i><span><b>${esc(n)}</b><small>${famCount.get(n)} รุ่นย่อย</small></span>${ICON.next}</button>`).join('')}</div>` : '';
+    }).join('');
+}
+
+/* ---------- step 2: เลือกรุ่นย่อย ---------- */
+function rowHtml(v, toks, withModel) {
+  const o = pick(v).offers.find(o => o.g != null);
+  return `<button type="button" class="row" data-vid="${v.id}"><span><b>${hl(v.n, toks)}</b><small>${withModel ? esc(sn(v.model)) + ' · ' : ''}ราคาขาย ${fmt0(v.p)} บาท</small></span>${o ? `<em>เบี้ยเริ่ม<b>${fmt0(Math.round(o.g))}</b></em>` : ''}${ICON.next}</button>`;
+}
+function listResults() {
+  const toks = norm(state.q + ' ' + state.f).split(' ').filter(Boolean);
+  return {toks, res: vehicles.filter(v => (!state.fam || v.fam === state.fam) && (!state.model || v.model === state.model) && toks.every(t => v.hay.includes(t)) && (state.ins == null || v.offers.some(o => o.ins === state.ins))).sort((a, b) => byYear(a.model, b.model) || a.id - b.id)};
+}
+function rowsHtml() {
+  const {toks, res} = listResults();
+  let html = `<p class="sub" role="status" aria-live="polite">${res.length ? `พบ ${res.length.toLocaleString()} รุ่นย่อย · แตะเพื่อดูเบี้ย${state.ins != null ? 'ของ ' + esc(DATA.ins[state.ins]) : 'ทุกบริษัท'}` : 'ไม่พบรุ่นที่ตรงกับคำค้น'}</p>`;
+  if (!res.length) return html + `<div class="empty"><b>ไม่พบรุ่นรถนี้</b>ลองพิมพ์ให้สั้นลง เช่น “fortuner” หรือ “4x4”<br>${state.ins != null ? '<button type="button" class="btn" data-ins="">ดูทุกบริษัทประกัน</button> ' : ''}<button type="button" class="btn" data-go="home">ดูรุ่นรถทั้งหมด</button></div>`;
+  const total = new Map();
+  res.forEach(v => total.set(v.model, (total.get(v.model) || 0) + 1));
+  let last = null, open = false;
+  res.slice(0, state.shown).forEach(v => {
+    if (v.model !== last) {
+      if (open) html += '</div></section>';
+      html += `<section class="grp"><h3 class="grp-h"><span>${hl(sn(v.model), toks)}</span><small>${total.get(v.model)} รุ่นย่อย</small></h3><div class="list">`;
+      open = true; last = v.model;
+    }
+    html += rowHtml(v, toks);
+  });
+  if (open) html += '</div></section>';
+  if (res.length > state.shown) html += `<button type="button" class="btn more" data-more>แสดงเพิ่ม (อีก ${(res.length - state.shown).toLocaleString()} รุ่น)</button>`;
+  return html + `<p class="hint">“เบี้ยเริ่ม” คือเบี้ยรวมต่ำสุดต่อปีของแผน${USE_LABEL[state.use]} ${state.phyd ? 'PHYD' : 'ปกติ'} เทียบภายในรหัสเดียวกัน (ถ้ารุ่นนั้นมี)${state.ins != null ? ' · เฉพาะ ' + esc(DATA.ins[state.ins]) : ''}</p>`;
+}
+// ดรอปดาวน์ของเราเอง: opts = [[value, label, count], ...]
+function dd(title, current, opts, key, selected) {
+  return `<div class="dd" data-key="${key}"><button type="button" class="dd-btn" data-dd aria-haspopup="listbox" aria-expanded="false"><span><small>${title}</small>${esc(current)}</span>${ICON.down}</button>
+    <div class="dd-pop" role="listbox" aria-label="${title}" hidden>${opts.map(([val, label, n]) =>
+      `<button type="button" role="option" aria-selected="${String(selected) === String(val)}" data-${key}="${esc(val)}"${n ? '' : ' disabled'}><span>${esc(label)}</span><small>${n} รุ่น</small></button>`).join('')}</div></div>`;
+}
+function listHtml() {
+  let html = `<button type="button" class="back" data-go="home">${ICON.back}เลือกรุ่นรถใหม่</button>
+    <h2>${state.fam ? esc(state.fam) : `ผลการค้นหา “${esc(state.q)}”`}</h2>`;
+  let dds = '';
+  if (state.fam) {
+    const all = vehicles.filter(v => v.fam === state.fam);
+    const years = [...new Set(all.map(v => v.model))].sort(byYear);
+    if (all.length > 8) html += `<div class="filter">${svg('<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>')}<label class="sr" for="f">กรองรุ่นย่อย</label><input id="f" type="text" inputmode="search" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search" placeholder="กรองในรุ่นนี้ เช่น 2.4 AT, 4x4, hev" value="${esc(state.f)}"><button type="button" id="fclr" data-clearf aria-label="ล้างตัวกรอง"${state.f ? "" : " hidden"}>${ICON.x}</button></div>`;
+    if (years.length > 1) dds += dd('รุ่นปี', state.model ? sn(state.model) : 'ทุกรุ่นปี',
+      [['', 'ทุกรุ่นปี', all.length]].concat(years.map(y => [y, sn(y), all.filter(v => v.model === y).length])), 'model', state.model);
+  }
+  const toks = norm(state.q).split(' ').filter(Boolean);
+  const base = vehicles.filter(v => (!state.fam || v.fam === state.fam) && (!state.model || v.model === state.model) && toks.every(x => v.hay.includes(x)));
+  dds += dd('บริษัทประกัน', state.ins == null ? 'ทุกบริษัท' : DATA.ins[state.ins],
+    [['', 'ทุกบริษัท', base.length]].concat(DATA.ins.map((name, i) => [i, name, base.filter(v => v.offers.some(o => o.ins === i)).length])), 'ins', state.ins == null ? '' : state.ins);
+  html += `<div class="dds">${dds}</div>`;
+  return html + `<div id="rows">${rowsHtml()}</div>`;
+}
+
+/* ---------- step 3: ดูเบี้ย ---------- */
+function pick(v) {
+  // เทียบเบี้ยเฉพาะรหัสเดียวกันเสมอ: ต่างรหัส = ต่างอัตราเบี้ย
+  const only = state.ins != null && v.offers.some(o => o.ins === state.ins);
+  const src = only ? v.offers.filter(o => o.ins === state.ins) : v.offers;
+  const codes = [...new Set(src.map(o => o.code))].sort((a, b) => (useOf(a) > useOf(b) ? -1 : useOf(a) < useOf(b) ? 1 : a.localeCompare(b)));
+  const code = codes.includes(state.code) ? state.code : (codes.find(c => useOf(c) === state.use) ?? codes[0]);
+  const plans = new Set(src.filter(o => o.code === code).map(o => o.phyd));
+  const phyd = plans.has(state.phyd) ? state.phyd : [...plans][0];
+  const offers = src.filter(o => o.code === code && o.phyd === phyd)
+    .sort((a, b) => (a.g ?? Infinity) - (b.g ?? Infinity) || a.ins - b.ins);
+  return {codes, code, plans, phyd, offers, only};
+}
+const codeLabel = c => `${USE_LABEL[useOf(c)]} · ${c || 'ไม่ระบุรหัส'}`;
+function detailHtml() {
+  const v = vehicles[state.vid], k = pick(v);
+  const seg = (name, opts) => `<div class="seg" role="group" aria-label="${name}">${opts.map(([val, label, ok, on]) =>
+    `<button type="button" data-${name}="${val}" aria-pressed="${on}"${ok ? '' : ' disabled'}>${label}</button>`).join('')}</div>`;
+  const priced = k.offers.filter(o => o.g != null);
+  const best = priced[0], worst = priced[priced.length - 1];
+  let html = `<button type="button" class="back" data-go="list">${ICON.back}เลือกรุ่นย่อยอื่น</button>
+    <div class="car"><small>${esc(v.model)}</small><h2>${esc(v.n)}</h2><p>ราคาขาย <b>${fmt0(v.p)}</b> บาท</p></div>
+    <div class="pick">
+      <div><span>การใช้รถ · รหัส</span>${seg('code', k.codes.map(c => [c, codeLabel(c), true, c === k.code]))}</div>
+      <div><span>แผนประกัน</span>${seg('phyd', [[0, 'ปกติ', k.plans.has(0), k.phyd === 0], [1, 'PHYD', k.plans.has(1), k.phyd === 1]])}</div>
+    </div>${k.plans.size < 2 ? '<p class="hint" style="margin:-12px 2px 24px">แผนที่ขีดฆ่าคือแผนที่เอกสารไม่มีสำหรับรุ่นและรหัสนี้</p>' : ''}`;
+  if (k.only) html += `<div class="flt"><span>กำลังแสดงเฉพาะ <b>${esc(DATA.ins[state.ins])}</b></span><button type="button" data-ins="">ดูทุกบริษัท</button></div>`;
+  if (best) html += `<div class="answer">${ICON.check}<div><small>${k.only ? 'เบี้ยต่ำสุดของบริษัทนี้' : 'เบี้ยถูกที่สุด'} · รหัส ${k.code || 'ไม่ระบุ'}${k.phyd ? ' PHYD' : ''}</small><strong>${esc(DATA.ins[best.ins])}</strong>${!k.only && priced.length > 1 && worst.g > best.g ? `<small>ถูกกว่าเจ้าที่แพงสุด ${fmt2(worst.g - best.g)} บาท</small>` : ''}</div>
+      <div class="price-big">${fmt2(best.g)}<br><small>บาท / ปี</small></div></div>`;
+  const codes = [...new Set(k.offers.map(o => o.code))];
+  const notes = new Map();
+  codes.forEach(code => {
+    const list = k.offers.filter(o => o.code === code);
+    html += `<h3 class="code-h">เปรียบเทียบ ${list.length} รายการ · รหัส ${code || 'ไม่ระบุ'}${k.phyd ? ' PHYD' : ''}</h3><ol class="offers">`;
+    list.forEach((o, i) => {
+      const isBest = best && o.g === best.g;
+      const price = o.g != null
+        ? `<b>${fmt2(o.g)}</b><small>${isBest ? 'บาท / ปี' : '+' + fmt2(o.g - best.g)}</small>`
+        : `<span class="na">${esc(naText(o))}</span>`;
+      html += `<li class="offer${isBest ? ' best' : ''}"><span class="rank" aria-hidden="true">${i + 1}</span>
+        <div><span class="o-name">${esc(DATA.ins[o.ins])}${isBest && !k.only ? '<span class="tag">ถูกสุด</span>' : ''}</span>
+        <span class="o-sub">ทุนประกัน ${fmt0(o.s)} บาท</span>
+        <button type="button" class="o-more" data-det aria-expanded="false">รายละเอียด${ICON.down}</button><div class="o-det" hidden>${o.net != null ? 'เบี้ยสุทธิ ' + fmt2(o.net) + ' บาท · ' : ''}อ้างอิง PDF หน้า ${o.pg}</div></div>
+        <div class="o-price">${price}</div></li>`;
+      o.notes.forEach(n => (notes.get(n) || notes.set(n, new Set()).get(n)).add(DATA.ins[o.ins]));
+    });
+    html += '</ol>';
+  });
+  if (notes.size) html += '<div class="notes"><p>เงื่อนไขตามเอกสาร</p>' + [...notes].map(([n, who]) => `<div><b>${esc([...who].join(', '))}:</b> ${esc(n.replace(/^\*\s*/, ''))}</div>`).join('') + '</div>';
+  html += `<div class="actions"><button type="button" class="btn" data-go="home">เช็กรุ่นอื่น</button></div>`;
+  return html;
+}
+/* ---------- render ---------- */
+function syncStickyOffset() {
+  const bar = document.querySelector('.steps');
+  const stuck = getComputedStyle(bar).position === 'sticky';
+  document.documentElement.style.setProperty('--steps-h', (stuck ? bar.offsetHeight : 0) + 'px');
+}
+addEventListener('resize', syncStickyOffset);
+function render() {
+  const step = state.vid != null ? 3 : (state.fam || state.q) ? 2 : 1;
+  document.body.classList.toggle('admin', state.admin);
+  document.querySelectorAll('[data-asof]').forEach(e => { e.textContent = DATA.asOf || '–'; });
+  const labels = ['เลือกรุ่นรถ', 'เลือกรุ่นย่อย', 'ดูเบี้ยประกัน'];
+  $('steps').innerHTML = labels.map((l, i) => {
+    const n = i + 1, cur = n === step, done = n < step;
+    const inner = `<i>${n}</i><span>${l}</span>`;
+    return `<li>${done ? `<button type="button" class="step done" data-go="${n === 1 ? 'home' : 'list'}">${inner}</button>`
+      : `<span class="step"${cur ? ' aria-current="step"' : ''}>${inner}</span>`}</li>`;
+  }).join('');
+  document.body.classList.toggle('inner', step > 1 || state.admin);
+  $('clr').style.display = state.q ? 'flex' : 'none';
+  if (document.activeElement !== $('q')) $('q').value = state.q;
+  $('view').innerHTML = state.admin ? Updater.html(DATA) : step === 3 ? detailHtml() : step === 2 ? listHtml() : homeHtml();
+  syncStickyOffset();
+}
+
+/* ---------- events ---------- */
+let timer;
+$('q').addEventListener('input', e => { clearTimeout(timer); timer = setTimeout(() => go({q: e.target.value, fam: '', model: '', f: '', vid: null}, false), 140); });
+$('view').addEventListener('input', e => {
+  if (e.target.id !== 'f') return;
+  state.f = e.target.value; state.shown = PAGE; $('fclr').hidden = !state.f;
+  $('rows').innerHTML = rowsHtml();
+});
+$('clr').onclick = () => { $('q').value = ''; go({q: '', fam: '', model: '', f: '', ins: null, vid: null}); $('q').focus(); };
+function closeDd(focus) { document.querySelectorAll('.dd-pop:not([hidden])').forEach(p => { p.hidden = true; const b = p.previousElementSibling; b.setAttribute('aria-expanded', 'false'); if (focus) b.focus(); }); }
+document.addEventListener('keydown', e => {
+  const opt = e.target.closest && e.target.closest('.dd-pop [role=option]');
+  if (e.key === 'Escape') closeDd(true);
+  if (opt && (e.key === 'ArrowDown' || e.key === 'ArrowUp')) { e.preventDefault(); const n = e.key === 'ArrowDown' ? opt.nextElementSibling : opt.previousElementSibling; if (n) n.focus(); }
+  if (e.key === '/' && !/INPUT|TEXTAREA/.test(document.activeElement.tagName)) { e.preventDefault(); $('q').focus(); }
+});
+// หลังเลือกตัวกรอง: ให้เห็นว่าตัวเลือกถูกรับแล้วและข้อมูลด้านล่างเปลี่ยนตาม (ตัวเลือกกะพริบวง, รายการเลื่อนเข้าใหม่, ตัวเลขเบี้ยไฮไลต์)
+function flash(key) {
+  const btn = key && document.querySelector(`.dd[data-key="${key}"] .dd-btn`);
+  [btn, ...document.querySelectorAll('#rows, .flt, .answer, .code-h, .offers')].forEach(el => el && el.classList.add('fx'));
+}
+document.addEventListener('click', e => {
+  const t = e.target.closest('[data-fam],[data-model],[data-vid],[data-go],[data-more],[data-code],[data-phyd],[data-dd],[data-det],[data-clearf],[data-ins],[data-adm]');
+  if (!e.target.closest('.dd')) closeDd();
+  if (!t || t.disabled) return;
+  const d = t.dataset;
+  if ('adm' in d) {
+    const A = Updater.adm;
+    if (d.adm === 'open') { Object.assign(A, {step: Updater.needLogin() ? 'login' : 'pick', error: ''}); state.admin = true; render(); scrollTo(0, 0); }
+    else if (d.adm === 'close') { state.admin = false; render(); scrollTo(0, 0); }
+    else if (d.adm === 'logout') Updater.logout(render);
+    else if (d.adm === 'again') { A.step = 'pick'; render(); }
+    else if (d.adm === 'save') Updater.save(applyData, render);
+    else if (d.adm === 'restore') Updater.restore(applyData, render);
+    return;
+  }
+  if ('dd' in d) { const pop = t.nextElementSibling, open = pop.hidden; closeDd(); pop.hidden = !open; t.setAttribute('aria-expanded', open); if (open) (pop.querySelector('[aria-selected=true]') || pop.firstElementChild).focus(); return; }
+  if ('det' in d) { const open = t.getAttribute('aria-expanded') !== 'true'; t.setAttribute('aria-expanded', open); t.nextElementSibling.hidden = !open; return; }
+  if ('clearf' in d) { const f = $('f'); f.value = ''; f.dispatchEvent(new Event('input', {bubbles: true})); f.focus(); return; }
+  if ('fam' in d) { $('q').value = ''; go({q: '', fam: d.fam, model: '', f: '', ins: null, vid: null}); }
+  else if ('model' in d) { go({model: d.model}, false); flash('model'); }
+  else if ('ins' in d) { go({ins: d.ins === '' ? null : +d.ins}, false); flash('ins'); }
+  else if ('vid' in d) { recent.add(+d.vid); go({vid: +d.vid}); }
+  else if ('more' in d) { state.shown += PAGE; $('rows').innerHTML = rowsHtml(); }
+  else if ('code' in d) { go({code: d.code, use: useOf(d.code)}, false); flash(); }
+  else if ('phyd' in d) { go({phyd: +d.phyd}, false); flash(); }
+  else if (d.go === 'home') { $('q').value = ''; go({q: '', fam: '', model: '', f: '', ins: null, vid: null}); }
+  else if (d.go === 'list') {
+    const v = vehicles[state.vid];
+    go(state.q || state.fam ? {vid: null} : {vid: null, fam: v.fam});
+  }
+});
+
+// เปลี่ยนชุดข้อมูลทั้งหน้า (null = กลับไปใช้ข้อมูลตั้งต้น) แล้วพากลับไปจุดที่ยังใช้ได้กับข้อมูลชุดใหม่
+function applyData(d) {
+  setData(d || BASE);
+  Object.assign(state, {model: '', ins: null, vid: null, f: '', shown: PAGE});
+  if (state.fam && !famCount.has(state.fam)) state.fam = '';
+  try { history.replaceState(null, '', hashOf()); } catch (e) {}
+  render();
+}
+$('view').addEventListener('submit', e => { if (e.target.id === 'admLogin') { e.preventDefault(); const f = new FormData(e.target); Updater.login(f.get('email'), f.get('pw'), render); } });
+$('view').addEventListener('change', e => { if (e.target.id === 'pdfFile' && e.target.files[0]) Updater.readFile(e.target.files[0], render); });
+$('view').addEventListener('dragover', e => { const z = e.target.closest('#drop'); if (z) { e.preventDefault(); z.classList.add('over'); } });
+$('view').addEventListener('dragleave', e => { const z = e.target.closest('#drop'); if (z) z.classList.remove('over'); });
+$('view').addEventListener('drop', e => { if (e.target.closest('#drop')) { e.preventDefault(); const f = e.dataTransfer.files[0]; if (f) Updater.readFile(f, render); } });
+
+readHash();
+render();
+Updater.start(applyData).catch(() => {});
+</script>
+</body>
+</html>

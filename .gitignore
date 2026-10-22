@@ -1,0 +1,5 @@
+__pycache__/
+share.html
+.env
+.env.*
+supabase/.temp/
